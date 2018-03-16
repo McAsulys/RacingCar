@@ -104,7 +104,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
         float tiles_x = (1.0f*getWidth())/track.getTileWidth();
         float tiles_y =  (1.0f*getHeight())/track.getTileHeight();
         float min_tiles = Math.min(tiles_x,tiles_y);
-        float scale = (min_tiles)/7;
+        float scale = (min_tiles)/12;
 
         // La suite de transfomations est à interpréter "à l'envers"
 
@@ -113,13 +113,13 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
 
         // On tourne le tout dans le sens inverse à l'angle de la voiture par rapport à la pise
         // Du coup, la voiture sera toujours orientée pareil à l'écran, c'est le décor qui bougera
-        canvas.rotate(-car.direction);
+//        canvas.rotate(-car.direction);
 
         // On mets à l'échelle calculée au dessus
         canvas.scale(scale, scale);
 
         // On centre sur la position actuelle de la voiture (qui se retrouve en 0,0 )
-        canvas.translate(-car.x * track.getTileWidth(),-car.y *track.getTileHeight());
+        canvas.translate(-track.getWidth()/2,-car.y *track.getTileHeight());
     }
 
 

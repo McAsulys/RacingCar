@@ -42,6 +42,8 @@ public class Car {
         direction += dd*v*sprite.h;
         x += (float) ( v*sprite.h*Math.cos(Math.toRadians(direction-90)));
         y += (float) ( v*sprite.h*Math.sin(Math.toRadians(direction-90)));
+        //y += (float) (y+v+0.5(a));
+
 
     }
 
