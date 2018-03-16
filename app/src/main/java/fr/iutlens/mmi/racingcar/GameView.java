@@ -49,7 +49,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
 
         // Création des différents éléments à afficher dans la vue
         track = new Track(null,R.drawable.circuit);
-        car = new Car(R.drawable.car,3,8,30);
+        car = new Car(R.drawable.car,3,8);
 
         // Gestion du rafraichissement de la vue. La méthode update (juste en dessous)
         // sera appelée toutes les 30 ms
@@ -72,6 +72,13 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
         if (this.isShown()) { // Si la vue est visible
             timer.scheduleRefresh(30); // programme le prochain rafraichissement
             car.update(); // mise à jour de la position de la voiture
+
+            if (car.x> track.getSizeX()) car.x -= track.getSizeX();
+            if (car.x<0) car.x += track.getSizeX();
+            if (car.y> track.getSizeX()) car.y -= track.getSizeY();
+            if (car.y<0) car.y += track.getSizeY();
+
+
             invalidate(); // demande à rafraichir la vue
         }
     }
