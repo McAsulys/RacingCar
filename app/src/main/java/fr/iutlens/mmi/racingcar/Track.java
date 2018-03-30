@@ -10,6 +10,9 @@ import fr.iutlens.mmi.racingcar.utils.SpriteSheet;
 
 public class Track {
 
+    public static final int BLOQUE = 0;
+    public static final int BRANCHE = 2;
+    public static final int LIBRE = 1;
     private int[][] data;
     private final String DIGITS ="0123456789ABCDEFGH";
     // 0123
@@ -155,17 +158,80 @@ public class Track {
         }
     }
 
-    public boolean IsValid(float x, float y) {
+
+
+
+    public int IsValid(float x, float y) {
+        /* 0 = bloqué
+        * 1 = sans obstacle
+        * 2 = branche
+        * */
         int i, j;
         i = (int) x; j = (int) y;
 
-        if(j < 0 || i < 0) return false;
-        if(j > getSizeY()) return false;
+        if(j < 0 || i < 0) return 0;
+        if(j > getSizeY()) return 0;
+        int c = get(i,j);
 
-        if (get(i,j) == 1 ||get(i,j)  == 4 ||get(i,j)  == 2 ||get(i,j)  == 5){
-                return false;
+        x = x - ((int) x);
+        y = y - ((int) y);
+
+        return mask(x,y,c);
+
+}
+
+    private int mask(float x, float y, int c) {
+        switch (c){
+            case 1 :
+                if (cercle(x,y,0.5f,0.5f,0.25f)) return BLOQUE;
+                break;
+            case 2 :
+                if(x<0.4) return BLOQUE;
+                break;
+            case 4 :
+                if(cercle(x,y,0.5f,0.5f,0.5f)) return BLOQUE;
+                break;
+            case 5 :
+                if(x>0.6) return BLOQUE;
+                break;
+            case 7 :
+                if(cercle(x,y,0.5f,0.5f,0.5f)) return BRANCHE;
+                break;
+            case 8 :
+                if(y>0.6) return BLOQUE;
+                break;
+            case 9 :
+                if(cercle(x,y,1,1,0.6f)) return LIBRE;
+                return BLOQUE;
+            case 10 :
+                if(cercle(x,y,0,1,0.6f)) return LIBRE;
+                return BLOQUE;
+            case 11 :
+                if(y<0.4) return BLOQUE;
+                break;
+            case 12 :
+                if(cercle(x,y,1,0,0.6f)) return LIBRE;
+                return BLOQUE;
+            case 13 :
+                if(cercle(x,y,0,0,0.6f)) return LIBRE;
+                return BLOQUE;
+            case 14 :
+                if(cercle(x,y,0,1,0.4f)) return BLOQUE;
+                break;
+            case 15 :
+                if(cercle(x,y,1,1,0.4f)) return BLOQUE;
+                break;
+            case 16 :
+                if(cercle(x,y,1,0,0.4f)) return BLOQUE;
+                break;
+            case 17 :
+                if(cercle(x,y,0,0,0.4f)) return BLOQUE;
+                break;
         }
+        return LIBRE;
+    }
 
-        return true;
+    private boolean cercle(float x, float y,float xc,float yc, float r) {
+        return (x-xc)*(x-xc)+(y-yc)*(y-yc) <= r*r;
     }
 }

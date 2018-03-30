@@ -47,14 +47,19 @@ public class Car {
     public void update(Track track) {
         //direction += dd*vy*sprite.h;
         double vx = this.dd * 0.003;
+        float dv = vTarget- vy;
 
 
-        if(!track.IsValid((float) (x-vx),y)){
+        if(track.IsValid((float) (x-vx),y)==Track.BLOQUE){//empeche d'aller sur les obstacle dur
             vx = 0;
+        }if(track.IsValid((float) (x-vx),y)==Track.BRANCHE){//ralentie sur les branche en X
+            vx = vx/2;
+        }
+        if(track.IsValid((float) (x-vx),y-vy)==Track.BRANCHE){//ralentit sur les branche en Y
+            dv = vTarget/40 - vy;
         }
 
         a = 0.001f;
-        float dv = vTarget- vy;
         if (dv>0 && dv>a){ //acceleration
             dv = a;
         } else if (dv <0 && dv < -a){ //deceleration
@@ -63,13 +68,11 @@ public class Car {
         vy = vy +dv;
 
 
-        if(!track.IsValid(x,y-vy)){
+        if(track.IsValid(x,y-vy)==0){//arrete sur les obstacle dur
             vy = 0;
         }
 
-        if(track.IsValid((float) (x-vx),y-vy)){
-            vy = vy+dv;
-        }
+
 
         if (vx != 0 || vy !=0) direction = (float) Math.toDegrees(Math.atan2(vy,vx/5))-90;
 
