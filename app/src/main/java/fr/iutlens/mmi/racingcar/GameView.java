@@ -41,11 +41,11 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
     private void init(AttributeSet attrs, int defStyle) {
 
         // Chargement des feuilles de sprites
-        SpriteSheet.register(R.drawable.design,3,6,this.getContext());
+        SpriteSheet.register(R.drawable.circuit,3,6,this.getContext());
         SpriteSheet.register(R.drawable.kayakset,4,4,this.getContext());
 
         // Création des différents éléments à afficher dans la vue
-        track = new Track(null,R.drawable.design);
+        track = new Track(null,R.drawable.circuit);
         car = new Car(R.drawable.kayakset,3,8);
 
         // Gestion du rafraichissement de la vue. La méthode update (juste en dessous)
