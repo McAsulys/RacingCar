@@ -3,10 +3,7 @@ package fr.iutlens.mmi.racingcar;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-
-import java.util.Arrays;
 
 import fr.iutlens.mmi.racingcar.utils.OrientationProxy;
 import fr.iutlens.mmi.racingcar.utils.RefreshHandler;
@@ -44,12 +41,12 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
     private void init(AttributeSet attrs, int defStyle) {
 
         // Chargement des feuilles de sprites
-        SpriteSheet.register(R.drawable.circuit,4,4,this.getContext());
-        SpriteSheet.register(R.drawable.car,3,1,this.getContext());
+        SpriteSheet.register(R.drawable.design,3,6,this.getContext());
+        SpriteSheet.register(R.drawable.kayakset,4,4,this.getContext());
 
         // Création des différents éléments à afficher dans la vue
-        track = new Track(null,R.drawable.circuit);
-        car = new Car(R.drawable.car,3,8);
+        track = new Track(null,R.drawable.design);
+        car = new Car(R.drawable.kayakset,3,8);
 
         // Gestion du rafraichissement de la vue. La méthode update (juste en dessous)
         // sera appelée toutes les 30 ms
@@ -71,7 +68,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
     public void update() {
         if (this.isShown()) { // Si la vue est visible
             timer.scheduleRefresh(30); // programme le prochain rafraichissement
-            car.update(); // mise à jour de la position de la voiture
+            car.update(track); // mise à jour de la position de la voiture
 
             if (car.x> track.getSizeX()) car.x -= track.getSizeX();
             if (car.x<0) car.x += track.getSizeX();

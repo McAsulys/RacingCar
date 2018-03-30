@@ -42,10 +42,8 @@ public class Car {
     }
 
 
-    public void update() {
+    public void update(Track track) {
         //direction += dd*vy*sprite.h;
-        //x += (float) ( vy*sprite.h*Math.cos(Math.toRadians(direction-90)));
-        //y += (float) ( vy*sprite.h*Math.sin(Math.toRadians(direction-90)));
 
         a = 0.001f;
         float dv = vTarget- vy;
@@ -61,6 +59,10 @@ public class Car {
         x -= vx;
 
         direction = (float) Math.toDegrees(Math.atan2(vy,vx/5))-90;
+
+        if(track.IsValid(x,y)){
+
+        }
 
 
     }
