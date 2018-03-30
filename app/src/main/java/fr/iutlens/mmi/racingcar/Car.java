@@ -1,6 +1,7 @@
 package fr.iutlens.mmi.racingcar;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 import fr.iutlens.mmi.racingcar.utils.SpriteSheet;
 
@@ -14,7 +15,7 @@ public class Car {
 
     private SpriteSheet sprite;
 
-    float x,y,direction,a,vMax, vMin, vflow, vTarget;
+    float x,y,direction,a,vMax, vMin, vflow, vTarget, score;
     float vy,dd;
 
     public Car(int sprite_id, float x, float y){
@@ -28,6 +29,7 @@ public class Car {
         this.vMax = (float) 1;
         this.vMin = 0;
         this.vflow = (float) 0.1;
+        this.score = 0;
     }
 
     public void paint(Canvas canvas, int unit_x, int unit_y){
@@ -44,26 +46,39 @@ public class Car {
 
     public void update(Track track) {
         //direction += dd*vy*sprite.h;
+        double vx = this.dd * 0.003;
+
+
+        if(!track.IsValid((float) (x-vx),y)){
+            vx = 0;
+        }
 
         a = 0.001f;
         float dv = vTarget- vy;
-        if (dv>0 && dv>a){
+        if (dv>0 && dv>a){ //acceleration
             dv = a;
-        } else if (dv <0 && dv < -a){
+        } else if (dv <0 && dv < -a){ //deceleration
             dv =-10*a;
         }
         vy = vy +dv;
-        y = y- vy;
 
-        double vx = this.dd * 0.003;
-        x -= vx;
 
-        direction = (float) Math.toDegrees(Math.atan2(vy,vx/5))-90;
-
-        if(track.IsValid(x,y)){
-
+        if(!track.IsValid(x,y-vy)){
+            vy = 0;
         }
 
+        if(track.IsValid((float) (x-vx),y-vy)){
+            vy = vy+dv;
+        }
+
+        if (vx != 0 || vy !=0) direction = (float) Math.toDegrees(Math.atan2(vy,vx/5))-90;
+
+        x -= vx;
+
+        y = y- vy;
+
+        score +=vy;
+        Log.d("scorer ", String.valueOf(score));
 
     }
 

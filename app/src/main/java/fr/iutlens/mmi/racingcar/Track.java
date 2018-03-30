@@ -123,7 +123,7 @@ public class Track {
     }
 
     public int get(int i, int j){
-        return data[i][j];
+        return data[j][i];
     }
 
     public int getSizeY(){
@@ -159,14 +159,13 @@ public class Track {
         int i, j;
         i = (int) x; j = (int) y;
 
-        if(j < 0 || i < 0){
-            //if ( == 1 || == 4 || == 2 || == 5){
-            //    return false;
-            //}
-            return true;
+        if(j < 0 || i < 0) return false;
+        if(j > getSizeY()) return false;
+
+        if (get(i,j) == 1 ||get(i,j)  == 4 ||get(i,j)  == 2 ||get(i,j)  == 5){
+                return false;
         }
 
-
-        return false;
+        return true;
     }
 }
