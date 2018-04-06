@@ -3,6 +3,7 @@ package fr.iutlens.mmi.racingcar;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import fr.iutlens.mmi.racingcar.utils.OrientationProxy;
 
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
         // On récupère la vue du jeu
         GameView game = findViewById(R.id.gameView);
+        TextView score = findViewById(R.id.textViewScore);
+        game.setScoreView(score);
 
         // On configure le jeu pour recevoir les changements d'orientation
         proxy = new OrientationProxy(this,game);

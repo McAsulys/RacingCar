@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 import fr.iutlens.mmi.racingcar.utils.OrientationProxy;
 import fr.iutlens.mmi.racingcar.utils.RefreshHandler;
@@ -14,6 +15,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
     private Track track;
     private Car car;
     private RefreshHandler timer;
+    private TextView scoreView;
 
     public GameView(Context context) {
         super(context);
@@ -74,7 +76,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
             if (car.x<0) car.x += track.getSizeX();
             if (car.y> track.getSizeX()) car.y -= track.getSizeY();
             if (car.y<0) car.y += track.getSizeY();
-
+            if (scoreView!=null) scoreView.setText("score : "+String.valueOf((int) car.score));
 
             invalidate(); // demande à rafraichir la vue
         }
@@ -131,5 +133,9 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
     public void onOrientationChanged(float[] angle, long stamp) {
         car.setCommand(Math.toDegrees(angle[1]),Math.toDegrees(angle[2]));
 
+    }
+
+    public void setScoreView(TextView scoreView) {
+        this.scoreView = scoreView;
     }
 }

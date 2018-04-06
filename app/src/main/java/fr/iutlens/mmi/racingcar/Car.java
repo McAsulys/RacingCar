@@ -56,6 +56,7 @@ public class Car {
             vx = vx/2;
         }
         if(track.IsValid((float) (x-vx),y-vy)==Track.BRANCHE){//ralentit sur les branche en Y
+
             dv = vTarget/40 - vy;
         }
 
@@ -80,8 +81,8 @@ public class Car {
 
         y = y- vy;
 
-        score +=vy;
-        Log.d("scorer ", String.valueOf(score));
+        score += .03; //fromule du score
+        //Log.d("scorer ", String.valueOf((int) score));
 
     }
 
