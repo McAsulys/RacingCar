@@ -48,7 +48,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
 
         // Création des différents éléments à afficher dans la vue
         track = new Track(null,R.drawable.circuit);
-        car = new Car(R.drawable.kayakset,3,8);
+        car = new Car(R.drawable.kayakset,3,2);
 
         // Gestion du rafraichissement de la vue. La méthode update (juste en dessous)
         // sera appelée toutes les 30 ms
