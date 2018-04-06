@@ -6,6 +6,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
+import android.view.Display;
+import android.view.Surface;
+import android.view.WindowManager;
 
 /**
  * Created by dubois on 23/04/15.
@@ -13,6 +16,7 @@ import android.util.Log;
 public class OrientationProxy implements SensorEventListener {
 
     private final OrientationListener mListener;
+    private final Display mDisplay;
 
     public interface OrientationListener {
         void onOrientationChanged(float[] angle, long stamp);
@@ -37,6 +41,7 @@ public class OrientationProxy implements SensorEventListener {
         mListener = listener;
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        mDisplay = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
     }
 
     public void resume() {
@@ -64,7 +69,28 @@ public class OrientationProxy implements SensorEventListener {
         }
         if (mLastAccelerometerSet && mLastMagnetometerSet) {
             SensorManager.getRotationMatrix(mR, null, mLastAccelerometer, mLastMagnetometer);
+
+            int rotation = mDisplay.getRotation();
+
             SensorManager.getOrientation(mR, mOrientation);
+
+            // Prise en compte de la rotation de l'écran de l'écran
+            if(rotation == Surface.ROTATION_270) {
+                float tmp  =  mOrientation[1];
+                mOrientation[0] += Math.PI/2;
+                mOrientation[1] = -mOrientation[2];
+                mOrientation[2] = tmp;
+            } else if(rotation == Surface.ROTATION_90){
+                float tmp  =  mOrientation[1];
+                mOrientation[0] -= Math.PI/2;
+                mOrientation[1] = mOrientation[2];
+                mOrientation[2] = -tmp;
+            } else if(rotation == Surface.ROTATION_180){
+                mOrientation[0] = -mOrientation[0];
+                mOrientation[1] = -mOrientation[1];
+                mOrientation[2] = -mOrientation[2];
+            }
+
             mListener.onOrientationChanged(mOrientation,event.timestamp/1000000l);
         }
     }
