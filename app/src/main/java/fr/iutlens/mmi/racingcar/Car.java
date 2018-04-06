@@ -99,7 +99,8 @@ public class Car {
     }
 
     public void setCommand(double pitch, double roll) {
-        pitch -= 45;
+        pitch = -pitch -45;
+        roll = -roll;
         pitch = rescale(pitch,90,15);
         roll = rescale(roll,90,15);
 
