@@ -13,6 +13,7 @@ public class Track {
     public static final int BLOQUE = 0;
     public static final int BRANCHE = 2;
     public static final int LIBRE = 1;
+    public static final int ARRIVEE = 3;
     private int[][] data;
     private final String DIGITS ="0123456789ABCDEFGH";
     // 0123
@@ -102,6 +103,7 @@ public class Track {
         /* 0 = bloqué
         * 1 = sans obstacle
         * 2 = branche
+        * 3 = Arrivé
         * */
         int i, j;
         i = (int) x; j = (int) y;
@@ -164,6 +166,8 @@ public class Track {
             case 17 :
                 if(cercle(x,y,0,0,0.4f)) return BLOQUE;
                 break;
+            case 18: case 19:case 20 :
+                return ARRIVEE;
         }
         return LIBRE;
     }
