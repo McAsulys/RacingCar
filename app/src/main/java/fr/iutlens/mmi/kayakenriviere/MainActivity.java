@@ -1,11 +1,10 @@
-package fr.iutlens.mmi.racingcar;
+package fr.iutlens.mmi.kayakenriviere;
 
-import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import fr.iutlens.mmi.racingcar.utils.OrientationProxy;
+import fr.iutlens.mmi.kayakenriviere.utils.OrientationProxy;
 
 public class MainActivity extends AppCompatActivity {
 

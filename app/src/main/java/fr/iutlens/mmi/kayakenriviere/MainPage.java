@@ -1,4 +1,4 @@
-package fr.iutlens.mmi.racingcar;
+package fr.iutlens.mmi.kayakenriviere;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
