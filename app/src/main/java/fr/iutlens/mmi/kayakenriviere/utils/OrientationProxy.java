@@ -1,11 +1,10 @@
-package fr.iutlens.mmi.racingcar.utils;
+package fr.iutlens.mmi.kayakenriviere.utils;
 
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;

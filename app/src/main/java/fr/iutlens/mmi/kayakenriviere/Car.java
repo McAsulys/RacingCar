@@ -1,9 +1,8 @@
-package fr.iutlens.mmi.racingcar;
+package fr.iutlens.mmi.kayakenriviere;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
-import fr.iutlens.mmi.racingcar.utils.SpriteSheet;
+import fr.iutlens.mmi.kayakenriviere.utils.SpriteSheet;
 
 /**
  *
