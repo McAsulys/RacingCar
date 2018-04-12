@@ -1,8 +1,8 @@
-package fr.iutlens.mmi.racingcar;
+package fr.iutlens.mmi.kayakenriviere;
 
 import android.graphics.Canvas;
 
-import fr.iutlens.mmi.racingcar.utils.SpriteSheet;
+import fr.iutlens.mmi.kayakenriviere.utils.SpriteSheet;
 
 /**
  * Created by dubois on 27/12/2017.
@@ -14,12 +14,13 @@ public class Track {
     public static final int BRANCHE = 2;
     public static final int LIBRE = 1;
     private int[][] data;
-    private final String DIGITS ="0123456789ABCDEFGH";
+    private final String DIGITS ="0123456789ABCDEFGHIJK";
     // 0123
     // 4567
     // 89AB
     // CDEF
     private final String[] def = {
+            "IJJJJJJK",
             "2F8E6675",
             "259H1665",
             "252F888D",

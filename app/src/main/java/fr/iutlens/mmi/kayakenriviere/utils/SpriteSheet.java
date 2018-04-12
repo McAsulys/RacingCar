@@ -1,4 +1,4 @@
-package fr.iutlens.mmi.racingcar.utils;
+package fr.iutlens.mmi.kayakenriviere.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
