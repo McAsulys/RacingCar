@@ -48,7 +48,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
 
         // Création des différents éléments à afficher dans la vue
         track = new Track(null,R.drawable.circuit);
-        car = new Car(R.drawable.kayakset,4,2);
+        car = new Car(R.drawable.kayakset,4,track.getSizeY()-2);
 
         // Gestion du rafraichissement de la vue. La méthode update (juste en dessous)
         // sera appelée toutes les 30 ms
@@ -58,7 +58,13 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!timer.isRunning()) timer.scheduleRefresh(30);
+                if (!timer.isRunning() && !car.fini) timer.scheduleRefresh(30);
+                if (car.fini) {
+                    car.fini = false;
+                    car.score = 0;
+                    track = new Track(null,R.drawable.circuit);
+                    car = new Car(R.drawable.kayakset,4,track.getSizeY()-2);
+                }
             }
         });
     }
@@ -112,7 +118,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
         float tiles_x = (1.0f*getWidth())/track.getTileWidth();
         float tiles_y =  (1.0f*getHeight())/track.getTileHeight();
         float min_tiles = Math.min(tiles_x,tiles_y);
-        float scale = (min_tiles)/12;
+        float scale = (min_tiles)/8;
 
         // La suite de transfomations est à interpréter "à l'envers"
 

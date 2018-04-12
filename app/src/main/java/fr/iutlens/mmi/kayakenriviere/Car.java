@@ -85,7 +85,7 @@ public class Car {
 
         y = y- vy;
 
-        score += .03; //fromule du score
+        score += 3; //fromule du score
         //Log.d("scorer ", String.valueOf((int) score));
 
     }
