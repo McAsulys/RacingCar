@@ -17,6 +17,7 @@ public class Car {
 
     float x,y,direction,a,vMax, vMin, vflow, vTarget, score;
     float vy,dd;
+    public boolean fini;
 
     public Car(int sprite_id, float x, float y){
         this.x = x;
@@ -57,7 +58,7 @@ public class Car {
         }
         if(track.IsValid((float) (x-vx),y-vy)==Track.BRANCHE){//ralentit sur les branche en Y
 
-            dv = vTarget/40 - vy;
+            dv = vTarget/4 - vy;
         }
 
         a = 0.001f;
@@ -71,6 +72,10 @@ public class Car {
 
         if(track.IsValid(x,y-vy)==0){//arrete sur les obstacle dur
             vy = 0;
+        }
+        if (track.IsValid(x,y)==3){
+            //arriver dans le jeu.
+            fini = true;
         }
 
 
@@ -101,11 +106,11 @@ public class Car {
     public void setCommand(double pitch, double roll) {
         pitch = -pitch -45;
         roll = -roll;
-        pitch = rescale(pitch,90,15);
+        pitch = rescale(pitch,100,45);
         roll = rescale(roll,90,15);
 
-        this.a = (float) (pitch*0.00005);
-        this.dd = 0;
+      //  this.a = (float) (pitch*0.00005);
+        this.a = 0.005f;
         this.dd = (float) (roll/2);
         if (pitch < 0){
             //droite entre 0 et vflow sur -90 a 0

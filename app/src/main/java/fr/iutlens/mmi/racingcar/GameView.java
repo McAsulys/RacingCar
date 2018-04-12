@@ -69,7 +69,9 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
     @Override
     public void update() {
         if (this.isShown()) { // Si la vue est visible
-            timer.scheduleRefresh(30); // programme le prochain rafraichissement
+            if (!car.fini) {
+                timer.scheduleRefresh(30); // programme le prochain rafraichissement
+            }
             car.update(track); // mise à jour de la position de la voiture
 
             if (car.x> track.getSizeX()) car.x -= track.getSizeX();
@@ -115,7 +117,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
         // La suite de transfomations est à interpréter "à l'envers"
 
         // On termine par un centrage de l'origine (la voiture donc) dans la fenêtre
-        canvas.translate(getWidth()/2,getHeight()/2);
+        canvas.translate(getWidth()/2,getHeight()*0.8f);
 
         // On tourne le tout dans le sens inverse à l'angle de la voiture par rapport à la pise
         // Du coup, la voiture sera toujours orientée pareil à l'écran, c'est le décor qui bougera
