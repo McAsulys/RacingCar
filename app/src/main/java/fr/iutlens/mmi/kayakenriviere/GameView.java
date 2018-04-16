@@ -53,7 +53,7 @@ public class GameView extends View implements TimerAction,  OrientationProxy.Ori
         // Gestion du rafraichissement de la vue. La méthode update (juste en dessous)
         // sera appelée toutes les 30 ms
         timer = new RefreshHandler(this);
-
+        timer.scheduleRefresh(30);
         // Un clic sur la vue lance (ou relance) l'animation
         this.setOnClickListener(new OnClickListener() {
             @Override
